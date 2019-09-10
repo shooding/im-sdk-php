@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Imagemap Editor Online</title>  
+</head>
+<body>
+  <script type='text/javascript'>
+  	    function preview() {
+          document.getElementById('out').src = document.getElementById('baseUrl').value;
+          document.getElementById('out1').href = document.getElementById('in1').value;
+          document.getElementById('out2').href = document.getElementById('in2').value;
+          document.getElementById('out3').href = document.getElementById('in3').value;
+          document.getElementById('out4').href = document.getElementById('in4').value;
+        } 
+        function reset() {        	
+            document.getElementById('baseUrl').value = '';
+            document.getElementById('in1').value = '';
+            document.getElementById('in2').value = '';            
+            document.getElementById('in3').value = '';            
+            document.getElementById('in4').value = '';            
+            document.getElementById('out').src = '';
+            document.getElementById('out1').href = '';
+            document.getElementById('out2').href = '';
+            document.getElementById('out3').href = '';
+            document.getElementById('out4').href = '';
+        } 	
+        function cp(){
+        	// document.getElementById('out').select();
+          //default template
+          var jsonStr = '{"type":"imagemap","baseUrl":"bbb","altTitle":"","baseSize":{"width":1040,"height":1040},"actions":[{"type":"uri","linkUri":"xxx","area":{"x":0,"y":0,"width":520,"height":520}},{"type":"uri","linkUri":"xxx","area":{"x":520,"y":0,"width":520,"height":520}},{"type":"uri","linkUri":"xxx","area":{"x":0,"y":520,"width":520,"height":520}},{"type":"uri","linkUri":"xxx","area":{"x":520,"y":520,"width":520,"height":520}}]}';
+          var jsonObj = JSON.parse(jsonStr);
+          jsonObj.baseUrl=document.getElementById('baseUrl').value;
+          jsonObj.actions[0].linkUri=document.getElementById('in1').value;
+          jsonObj.actions[1].linkUri=document.getElementById('in2').value;
+          jsonObj.actions[2].linkUri=document.getElementById('in3').value;
+          jsonObj.actions[3].linkUri=document.getElementById('in4').value;
+          alert(JSON.stringify(jsonObj));
+        	// document.execCommand("copy");
+        }
+  </script>  
+  <p>
+    <input type="text" id="baseUrl" placeholder="baseUrl" size="100" maxlength="1024" value="https://storage.googleapis.com/shooding-sat/demo/stock-collage.jpg/1040"></input>
+  </p>  
+  <p>
+  	<textarea id="in1" style="width:104px;height:104px;" >https://tw.stock.yahoo.com/s/tse.php</textarea>
+    <textarea id="in2" style="width:104px;height:104px;" >https://tw.screener.finance.yahoo.net/screener/basic.html</textarea>
+    </p>
+  <p>
+    <textarea id="in3" style="width:104px;height:104px;" >https://finance.yahoo.com/most-active</textarea>
+    <textarea id="in4" style="width:104px;height:104px;" >https://finance.yahoo.com/etfs</textarea>
+  </p>
+  <p>
+  	<button onclick="preview()" style="width:100px;height:80px;font-size:20px;">Preview</button>
+  	<button onclick="reset()" style="width:100px;height:80px;font-size:20px;">clear</button>
+  	<button onclick="cp()" style="width:100px;height:80px;font-size:20px;">copy json</button>
+  </p>
+  <p>
+  	<img id="out" style="width:1040px;height:1040px;" src="" usemap="#mymap"></img>
+    <map name="mymap">
+  　   <area id="out1" shape="rect" coords=" 0 , 0 , 520 , 520" href="#" target='_blank'>
+       <area id="out2" shape="rect" coords=" 520 , 0 , 1040 , 520" href="#" target='_blank'>
+       <area id="out3" shape="rect" coords=" 0 , 520 , 520 , 1040" href="#" target='_blank'>
+       <area id="out4" shape="rect" coords=" 520 , 520 , 1040 , 1040" href="#" target='_blank'>
+    </map>
+  </p>
+</body>
+</html>
